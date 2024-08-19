@@ -11,4 +11,6 @@ export class Character {
             this.attributes[attribute.name] = attribute;
         });
     }
+
+    private adjustByAge(): void {}; // todo
 }

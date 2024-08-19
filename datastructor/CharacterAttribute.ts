@@ -1,46 +1,61 @@
-export class CharacterAttribute {
+export class Characteristic{
     public name: string;
     public value: number | string | any;
-    // 该字段包括了属性值的其他名称，用于搜索时的匹配
-    public alterNames: string[] = [];
-    public canBeModifiedInGame: boolean;
+    public alterNames: string[] = [];    // 该字段包括了属性值的其他名称，用于搜索时的匹配
 
-    // 该字段决定了该属性是否会在主页面中出现修改该值的按钮
+    constructor(name, value){
+        this.name = name
+        this.value = value
+    }
+}
 
-    constructor(name: string, value: number, canBeModifiedInGame: boolean = true) {
+class Attribute extends Characteristic{
+    constructor(name: string, value: number) {
         this.name = name;
         this.value = value;
     }
 }
 
-export class CharacterAttributeFixed extends CharacterAttribute {
-    constructor(name: string, value: number) {
-        super(name, value, false);
+export class DerivedAttribute extends Attribute {
+    constructor(name: string, calculate: (attributes: Attribute[]) => number, attributes: Attribute[]) {
+        super(name, calculate(attributes));
     }
 }
 
-export class CharacterAttributeModifiable extends CharacterAttribute {
+export class StatusAttribute extends Attribute {
     public max: number;
     public min: number;
 
     constructor(name: string, value: number) {
-        super(name, value, true);
+        super(name, value);
     }
 
-    setValue = (value: any) => {
-        if (typeof value !== 'number') {
-            this.value = value;
-            return;
-        }
-        if (value < this.min) {
+    public increase(value: number) {
+        self.value += value
+         if (self.value > this.max) {
             this.value = this.min;
-            console.log(`The value of ${this.name} is less than the minimum value ${this.min}`);
-        } else if (value > this.max) {
-            this.value = this.max;
             console.log(`The value of ${this.name} is greater than the maximum value ${this.max}`);
-        } else {
-            this.value = value;
         }
+    }
+
+    public decrease(value: number) {
+            self.value -= value
+             if (self.value < this.min) {
+                this.value = this.min;
+                console.log(`The value of ${this.name} is less than the minimum value ${this.min}`);
+            }
+        }
+}
+
+export class Skill  extends Characteristic {
+    constructor(name: string, value: number) {
+            super(name, value)
+    }
+}
+
+export class Background extends Characteristic {
+    constructor(name: string, value: string) {
+        super(name, value)
     }
 }
 
