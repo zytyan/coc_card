@@ -1,10 +1,10 @@
-import {CharacterAttribute, CharacterAttributeFixed} from "@/datastructor/CharacterAttribute";
+import {Characteristic} from "@/datastructor/CharacterAttribute";
 
 export class Character {
     public name: string;
-    public attributes: { [key: string]: CharacterAttribute };
+    public attributes: { [key: string]: Characteristic };
 
-    constructor(name: string, attributes: CharacterAttribute[]) {
+    constructor(name: string, attributes: Characteristic[]) {
         this.name = name;
         this.attributes = {};
         attributes.forEach(attribute => {
@@ -12,5 +12,5 @@ export class Character {
         });
     }
 
-    private adjustByAge(): void {}; // todo
+    // private adjustByAge(): void {}; // todo
 }

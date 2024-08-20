@@ -3,7 +3,7 @@ import {useState} from "react";
 import {Container, Grid, Paper, Stack, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
 import {Avatar} from "@mui/material";
 import React from "react";
-import {CharacterAttribute} from "@/datastructor/CharacterAttribute";
+import {Attribute} from "@/datastructor/CharacterAttribute";
 import {Character} from "@/datastructor/Character";
 
 const FastCharacterAttrBox = ({avatar, attr, key}) => {
@@ -22,20 +22,27 @@ const FastCharacterAttrBox = ({avatar, attr, key}) => {
     )
 }
 const FastAttrSelectBtn = ({name, setAttrKey, selectedComp, setSelectedComp}) => {
-
     return (
         <Grid item xs={1} key={name}>
-            <ToggleButton value={name}
-                          color="primary"
-                          selected={selectedComp === name}
-                          onClick={() => {
-                              // change selected attr
-                              setSelectedComp(name)
-
-                              setAttrKey(name)
-                          }}>
-                {name}
-            </ToggleButton>
+            <Stack
+                spacing={0}
+                alignItems="center"
+            >
+                <ToggleButton value={name}
+                              color="primary"
+                              selected={selectedComp === name}
+                              onClick={() => {
+                                  setSelectedComp(name);
+                                  setAttrKey(name);
+                              }}
+                              style={{
+                                  minWidth: '60px',
+                                  height: '40px',
+                              }}
+                >
+                    {name}
+                </ToggleButton>
+            </Stack>
         </Grid>
     )
 }
@@ -49,7 +56,7 @@ export const FastCharacterAttr = ({characters}) => {
             alignItems="center" // 水平居中
         >
             <Typography>快速属性： {attrKey}</Typography>
-            <Grid container spacing={2} columns={4}>
+            <Grid container spacing={2} columns={3}>
                 {characters.map((character, index) => {
                     console.log("ststajlksdfj");
                     return (<FastCharacterAttrBox avatar={index} attr={character?.attributes[attrKey]?.value ?? "nan"} key={index}/>);
@@ -57,23 +64,30 @@ export const FastCharacterAttr = ({characters}) => {
             </Grid>
 
 
-            <Grid container spacing={2} columns={4}>
+            <Grid container spacing={2} columns={3}>
                 <FastAttrSelectBtn name={"STR"} setAttrKey={setAttrKey} selectedComp={selectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"DEX"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"CON"} setAttrKey={setAttrKey} selectedComp={selectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"INT"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"SIZ"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"TEST4"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"DEX"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"TEST5"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"APP"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"TEST1"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"INT/IDE"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"TEST1"} setAttrKey={setAttrKey} selectedComp={selectedComp}
+                <FastAttrSelectBtn name={"POW"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
+                                   setSelectedComp={setSelectedComp}/>
+                <FastAttrSelectBtn name={"EDU"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
+                                   setSelectedComp={setSelectedComp}/>
+                <FastAttrSelectBtn name={"MOV"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
+                                   setSelectedComp={setSelectedComp}/>
+                <FastAttrSelectBtn name={"HP"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
+                                   setSelectedComp={setSelectedComp}/>
+                <FastAttrSelectBtn name={"SAN"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
             </Grid>
-
         </Stack>
     )
 }
