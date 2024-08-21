@@ -156,7 +156,7 @@ export const testDefaultCharacterAttributes = (base: number) => {
         return 6;
     }, {'STR': STR, 'SIZ': SIZ});
 
-    // 计算基础闪避 (基础闪避(自身属性) = DEX/2。最终闪避(技能) = 基础闪避 + 成长点 + 职业点 + 兴趣点)
+    // 计算闪避 (基础闪避(自身属性) = DEX/2。最终闪避(技能) = 基础闪避 + 成长点 + 职业点 + 兴趣点)
     const BaseDodge = new DerivedAttribute('BaseDodge', (attrs) => Math.floor(attrs.DEX.value / 2), {'DEX': DEX});
     const Dodge = new Skill('Dodge', BaseDodge.value, 0, 0, 0)
 
@@ -194,20 +194,19 @@ export const testDefaultCharacterAttributes = (base: number) => {
         new Skill('Disguise', 5, 0, 0, 0),
         new Skill('Psychoanalysis', 1, 0, 0, 0),
         new Skill('Dodge', 30, 0, 0, 0),
-        new Skill('Psychology', 10, 30, 0, 0),
+        new Skill('Psychology', 10, 0, 0, 30),
         new Skill('Drive Auto', 20, 0, 0, 0),
         new Skill('Ride', 5, 0, 0, 0),
-        new Skill('Electrical Repair', 10, 60, 0, 0),
-        new Skill('Science: Chemistry', 1, 20, 0, 0),
+        new Skill('Electrical Repair', 10, 0, 60, 0),
+        new Skill('Science: Chemistry', 1, 0, 20, 0),
         new Skill('Electronics Ω', 1, 0, 0, 0),
-        new Skill('Science: Meteorology', 1, 20, 0, 0),
+        new Skill('Science: Meteorology', 1, 0, 20, 0),
         new Skill('Fast Talk', 5, 0, 0, 0),
-        new Skill('Science: Geology', 1, 20, 0, 0),
+        new Skill('Science: Geology', 1, 0, 20, 0),
         new Skill('Fighting: Brawl', 25, 0, 0, 0),
         new Skill('Sleight of Hand', 10, 0, 0, 0),
-        new Skill('Fighting', 0, 0, 0, 0),
-        new Skill('Spot Hidden', 25, 60, 0, 0),
-        new Skill('Stealth', 20, 10, 0, 0),
+        new Skill('Spot Hidden', 25, 0, 60, 0),
+        new Skill('Stealth', 20, 0, 0, 10),
         new Skill('Firearms: Handgun', 15, 10, 0, 0),
         new Skill('Survival', 10, 0, 0, 0),
         new Skill('First Aid', 30, 0, 0, 0),
@@ -220,12 +219,34 @@ export const testDefaultCharacterAttributes = (base: number) => {
         new Skill('Language: Own', 75, 0, 0, 0),
     ];
 
-    // Return all attributes and skills
+    const PersonalBelongings = [
+        new BaseInformation('PersonalBelongings: M1911', '.45自动手枪 1D10+2'),
+        new BaseInformation('PersonalBelongings: Cash', '1000 Dollars'),
+    ]
+
+    const Background = [
+        new BaseInformation('Description', '喜歡實驗和研究、在實驗室擔任李博士的助手'),
+        new BaseInformation('Belief', '再一次就成功了'),
+        new BaseInformation('Significant People', '同實驗室帶我入門的學姊'),
+        new BaseInformation('Meaningful Location', '實驗室某角落（在那邊吃飯特別安心）'),
+        new BaseInformation('Treasured Possession', 'ＩＤ卡'),
+        new BaseInformation('Traits', '直覺靈敏，能在腦中模擬實驗結果，有９０％的正確率；會在實驗室用本生燈煮泡麵而不燒焦'),
+        new BaseInformation('Background',
+            '隔壁實驗室的金博士是萊肯塔夫的粉絲，但是這次的慶典時程剛好與金博士的研討會撞期，由於本次研討會非常重要，金博士無論如何都必須出席，於是拜託我前來，可以的話順便幫他要個簽名。\n' +
+            '來程的路上抱佛腳拜讀了萊肯塔夫的兩部作品，希望被搭話的時候不至於尷尬......\n' +
+            '經歷了曲徑旅店內一連串怪奇事件，我們被帶往醫院接受治療，期間不停有警察模樣的人前來問話，解釋這一切真是傷透了腦筋'),
+    ]
+
+    const Experience = [
+        new BaseInformation('Experience with Scenarios: 复足', '+5射擊，+5投擲'),
+        new BaseInformation('Experience with Scenarios: 死光', '+5射擊，艾蜜莉亞的手機號'),
+    ]
+
     return [
         ...playerInformation,
         AGE, STR, CON, SIZ, DEX, APP, INT_IDE, POW, EDU, MOV, LUC, DM, BUI,
         MaxHP, CurrentHP, HP, MaxSAN, CurrentSAN, SAN, MaxMP, CurrentMP, MP, BaseDodge, Dodge,
-        ...skills
+        ...skills, ...PersonalBelongings, ...Background, ...Experience,
     ];
 };
 
