@@ -94,7 +94,7 @@ export class DerivedInformation extends Information {
     }
 }
 
-export const testDefaultCharacterAttributes = (base: number) => {
+export const testDefaultCharacterAttributes = () => {
     // Player information
     const playerInformation = [
         new BaseInformation('PlayerName', '狐狸'),

@@ -22,11 +22,9 @@ export default function Home() {
                     <SearchBar/>
                     <FastCharacterAttr characters={
                         [
-                            new Character("base10", testDefaultCharacterAttributes(10)),
-                            new Character("base30", testDefaultCharacterAttributes(30)),
-                            new Character("base50", testDefaultCharacterAttributes(50)),
-                            new Character("base70", testDefaultCharacterAttributes(70)),
-                            new Character("base90", testDefaultCharacterAttributes(90)),
+                            new Character("狐狸", testDefaultCharacterAttributes()),
+                            new Character("狐狸", testDefaultCharacterAttributes()),
+                            new Character("狐狸", testDefaultCharacterAttributes()),
                         ]
                     }/>
                 </Grid>
