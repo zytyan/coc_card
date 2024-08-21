@@ -6,9 +6,10 @@ import React from "react";
 import {Attribute} from "@/datastructor/CharacterAttribute";
 import {Character} from "@/datastructor/Character";
 
-const FastCharacterAttrBox = ({avatar, attr, key}) => {
+const FastCharacterAttrBox = ({avatar, attr, keyId}) => {
+    console.log(keyId,"key");
     return (
-        <Grid item xs={1} key={key}>
+        <Grid item xs={1} key={keyId}>
             <Stack
                 spacing={0}
                 alignItems="center" // 水平居中
@@ -59,7 +60,7 @@ export const FastCharacterAttr = ({characters}) => {
             <Grid container spacing={2} columns={3}>
                 {characters.map((character, index) => {
                     console.log("ststajlksdfj");
-                    return (<FastCharacterAttrBox avatar={index} attr={character?.attributes[attrKey]?.value ?? "nan"} key={index}/>);
+                    return (<FastCharacterAttrBox avatar={index} attr={character?.attributes[attrKey]?.value ?? "nan"} keyId={index}/>);
                 })}
             </Grid>
 

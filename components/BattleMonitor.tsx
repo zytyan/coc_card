@@ -13,6 +13,14 @@ export const BattleMonitor = () => {
                 <Avatar>3</Avatar>
                 <Avatar>4</Avatar>
                 <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
+                <Avatar>5</Avatar>
             </Stack>
         </Stack>
     )

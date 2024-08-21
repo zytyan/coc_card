@@ -6,6 +6,7 @@ import {testDefaultCharacterAttributes} from "@/datastructor/CharacterAttribute"
 import {CharacterSheet} from "@/components/CharacterSheet";
 import {BattleMonitor} from "@/components/BattleMonitor";
 import {History} from "@/components/History";
+import {useEffect} from "react";
 
 const SearchBar = () => (
     <Paper sx={{p: 2}}>
@@ -32,7 +33,7 @@ export default function Home() {
                     <CharacterSheet/>
                 </Grid>
                 <Grid item xs={1} key={3}>
-                    <Stack  spacing={2}>
+                    <Stack spacing={2}>
                         <BattleMonitor/>
                         <History/>
                     </Stack>
