@@ -1,6 +1,17 @@
 "use client";
 import React, {useEffect, useReducer, useRef, useState} from 'react';
-import {Paper, Typography, Grid, Box, Divider, TextField, FormControlLabel, Switch} from '@mui/material';
+import {
+    Paper,
+    Typography,
+    Grid,
+    Box,
+    Divider,
+    TextField,
+    FormControlLabel,
+    Switch,
+    IconButton,
+    List, ListItem, Button, Drawer
+} from '@mui/material';
 import {
     testDefaultCharacterAttributes,
     BaseInformation,
@@ -8,6 +19,8 @@ import {
     DerivedAttribute,
     Skill
 } from "@/datastructor/CharacterAttribute";
+import {ChevronLeft as ChevronLeftIcon, Menu as MenuIcon} from "@mui/icons-material";
+import {useRouter} from "next/navigation";
 
 const DisplayAttr = ({rawAttr}) => (
     <Grid item xs={6}>
@@ -51,6 +64,27 @@ function CharacterCard({}) {
         </Box>
     );
 
+    const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const handleDrawerOpen = () => {
+        setDrawerOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setDrawerOpen(false);
+    };
+
+    const router = useRouter();
+
+    const handleButtonClickCharacterSheet = () => {
+        router.push('/CharacterSheet');
+    };
+    const handleButtonClickHome = () => {
+        router.push('/');
+    };
+
+
+
     // Filter attributes based on your requirements to render them in sections
     const playerInfo = attributes.filter(attr => attr instanceof BaseInformation);
     const baseAttributes = attributes.filter(attr => attr instanceof BaseAttribute);
@@ -60,7 +94,36 @@ function CharacterCard({}) {
     const background = attributes.filter(attr => attr instanceof BaseInformation && attr.name.includes('Background'));
     const [editMode, setEditMode] = useState(false);
     return (
+
         <Box>
+            <IconButton onClick={handleDrawerOpen}>
+                <MenuIcon/>
+            </IconButton>
+            <Drawer
+                variant="persistent"
+                anchor="left"
+                open={drawerOpen}
+                onClose={handleDrawerClose}
+            >
+                <div>
+                    <IconButton onClick={handleDrawerClose}>
+                        <ChevronLeftIcon/>
+                    </IconButton>
+                </div>
+                <List>
+                    <ListItem button>
+                        <Button variant="contained" color="primary" onClick={handleButtonClickHome}>
+                            主界面
+                        </Button>
+                    </ListItem>
+                    <ListItem button>
+                        <Button variant="contained" color="primary" onClick={handleButtonClickCharacterSheet}>
+                            狐狸
+                        </Button>
+                    </ListItem>
+                </List>
+            </Drawer>
+
             <FormControlLabel control={<Switch onChange={
                 (e) => setEditMode(e.target.checked)
             }/>} label="修改模式"/>
