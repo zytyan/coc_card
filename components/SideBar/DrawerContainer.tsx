@@ -21,18 +21,15 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({drawerOpen, setDrawerO
         setDrawerOpen(false);
     };
 
-    const handleButtonClickCharacterSheet = () => {
-        void router.push('/CharacterSheet');
-    };
-
-    const handleButtonClickHome = () => {
-        void router.push('/');
+    const handleButtonClick = (path: string) => {
+        void router.push(path);
     };
 
     const buttons = [
-        {label: 'Home', onClick: handleButtonClickHome},
-        {label: 'Character Sheet', onClick: handleButtonClickCharacterSheet},
+        {label: 'Home', onClick: () => handleButtonClick('/')},
+        {label: 'Character Sheet', onClick: () => handleButtonClick('/CharacterSheet')},
     ];
+
 
     return (
         <div>
