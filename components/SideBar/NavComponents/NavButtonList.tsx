@@ -11,10 +11,11 @@ interface NavButtonListProps {
 }
 
 const NavListItem = (label: string, onClick: () => void, key: number) => (
-    <ListItem key={key}>
+    <ListItem key={key} >
         <NavButton label={label} onClick={onClick}/>
     </ListItem>
 );
+
 
 const NavButtonList: React.FC<NavButtonListProps> = ({buttons}) => {
     return (
