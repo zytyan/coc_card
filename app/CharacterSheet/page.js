@@ -9,9 +9,8 @@ import {
     TextField,
     FormControlLabel,
     Switch,
-    IconButton,
-    List, ListItem, Button, Drawer
 } from '@mui/material';
+
 import {
     testDefaultCharacterAttributes,
     BaseInformation,
@@ -19,8 +18,9 @@ import {
     DerivedAttribute,
     Skill
 } from "@/datastructor/CharacterAttribute";
-import {ChevronLeft as ChevronLeftIcon, Menu as MenuIcon} from "@mui/icons-material";
-import {useRouter} from "next/navigation";
+
+import SideBar from "@/components/SideBar";
+
 
 const DisplayAttr = ({rawAttr}) => (
     <Grid item xs={6}>
@@ -64,26 +64,7 @@ function CharacterCard({}) {
         </Box>
     );
 
-    const [drawerOpen, setDrawerOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-        setDrawerOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setDrawerOpen(false);
-    };
-
-    const router = useRouter();
-
-    const handleButtonClickCharacterSheet = () => {
-        router.push('/CharacterSheet');
-    };
-    const handleButtonClickHome = () => {
-        router.push('/');
-    };
-
-
+    const [drawerOpen, setDrawerOpen] = useState(true);
 
     // Filter attributes based on your requirements to render them in sections
     const playerInfo = attributes.filter(attr => attr instanceof BaseInformation);
@@ -94,40 +75,14 @@ function CharacterCard({}) {
     const background = attributes.filter(attr => attr instanceof BaseInformation && attr.name.includes('Background'));
     const [editMode, setEditMode] = useState(false);
     return (
-
         <Box>
-            <IconButton onClick={handleDrawerOpen}>
-                <MenuIcon/>
-            </IconButton>
-            <Drawer
-                variant="persistent"
-                anchor="left"
-                open={drawerOpen}
-                onClose={handleDrawerClose}
-            >
-                <div>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
-                </div>
-                <List>
-                    <ListItem button>
-                        <Button variant="contained" color="primary" onClick={handleButtonClickHome}>
-                            主界面
-                        </Button>
-                    </ListItem>
-                    <ListItem button>
-                        <Button variant="contained" color="primary" onClick={handleButtonClickCharacterSheet}>
-                            狐狸
-                        </Button>
-                    </ListItem>
-                </List>
-            </Drawer>
-
+            <SideBar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
             <FormControlLabel control={<Switch onChange={
                 (e) => setEditMode(e.target.checked)
             }/>} label="修改模式"/>
-            <Paper sx={{padding: 4}}>
+            <Paper
+                sx={{ml: drawerOpen ? '240px' : '0px', transition: 'margin-left 0.3s'}}
+            >
                 {/* Render different sections of the character card */}
                 {renderAttributeSection('Player Information', playerInfo)}
                 {renderAttributeSection('Base Attributes', baseAttributes)}
