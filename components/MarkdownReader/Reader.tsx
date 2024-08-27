@@ -25,18 +25,21 @@ function MarkdownReader({filePath}) {
                             src={'/Modules/死光/' + src}
                             alt={alt}
                             style={{
-                                maxWidth: '100%', // 图片宽度最大为容器的100%
-                                height: 'auto',   // 高度自动调整以保持比例
-                                display: 'block', // 使图片成为块级元素
-                                margin: '16px 0' // 图片上下的外边距
+                                maxWidth: '60%',
+                                height: 'auto',
+                                display: 'inline-block',
+                                margin: '16px 0',
                             }}
                         />
                     ),
-                    h1: ({ node, ...props }) => <h1 style={{ fontSize: '2rem', color: '#3f51b5' }} {...props} />,
-                    h2: ({ node, ...props }) => <h2 style={{ fontSize: '1.5rem', color: '#3f51b5' }} {...props} />,
-                    h3: ({ node, ...props }) => <h3 style={{ fontSize: '1.25rem', color: '#3f51b5' }} {...props} />,
-                    p: ({ node, ...props }) => <p style={{ fontSize: '1rem', lineHeight: '1.6' }} {...props} />,
-                    li: ({ node, ...props }) => <li style={{ marginBottom: '8px' }} {...props} />,
+                    blockquote: ({ node, ...props }) => (
+                        <blockquote style={{ borderLeft: '4px solid #ccc', paddingLeft: '16px', color: '#666', fontStyle: 'italic' }} {...props} />
+                    ),
+                    h1: ({node, ...props}) => <h1 style={{fontSize: '2rem', color: '#3f51b5'}} {...props} />,
+                    h2: ({node, ...props}) => <h2 style={{fontSize: '1.5rem', color: '#3f51b5'}} {...props} />,
+                    h3: ({node, ...props}) => <h3 style={{fontSize: '1.25rem', color: '#3f51b5'}} {...props} />,
+                    p: ({node, ...props}) => <p style={{fontSize: '1rem', lineHeight: '1.6'}} {...props} />,
+                    li: ({node, ...props}) => <li style={{marginBottom: '8px'}} {...props} />,
 
                 }}
             />
