@@ -11,7 +11,7 @@ interface NavPaperProps {
 
 const NavPaper: React.FC<NavPaperProps> = ({buttons}) => {
     return (
-        <Paper sx={{backgroundColor: '#f5f5f5'}}>
+        <Paper sx={{height: '100vh', }}>
             <NavButtonList buttons={buttons}/>
         </Paper>
     );

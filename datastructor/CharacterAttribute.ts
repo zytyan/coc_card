@@ -96,8 +96,8 @@ export class DerivedInformation extends Information {
 
 export const testDefaultCharacterAttributes = () => {
     // Player information
+    const PlayerName =  new BaseInformation('PlayerName', '狐狸');
     const playerInformation = [
-        new BaseInformation('PlayerName', '狐狸'),
         new BaseInformation('CharacterName', '姜子瑜'),
         new BaseInformation('Career', '实验室助理'),
         new BaseInformation('Gender', '女'),
@@ -242,7 +242,7 @@ export const testDefaultCharacterAttributes = () => {
         new BaseInformation('Experience with Scenarios: 死光', '+5射擊，艾蜜莉亞的手機號'),
     ]
 
-    return [
+    return [PlayerName,
         ...playerInformation,
         AGE, STR, CON, SIZ, DEX, APP, INT_IDE, POW, EDU, MOV, LUC, DM, BUI,
         MaxHP, CurrentHP, HP, MaxSAN, CurrentSAN, SAN, MaxMP, CurrentMP, MP, BaseDodge, Dodge,

@@ -6,8 +6,6 @@ import {testDefaultCharacterAttributes} from "@/datastructor/CharacterAttribute"
 import {CharacterSheet} from "@/components/CharacterSheet";
 import {BattleMonitor} from "@/components/BattleMonitor";
 import {History} from "@/components/History";
-import SideBar from "@/components/SideBar";
-import {useState} from "react";
 
 const SearchBar = () => (
     <Paper sx={{p: 2}}>
@@ -17,15 +15,9 @@ const SearchBar = () => (
 
 
 export default function Home() {
-    const [drawerOpen, setDrawerOpen] = useState(true);
-
     return (
         <div className="App">
-
-            <SideBar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
-            <Grid container spacing={2} columns={3}
-                sx={{ml: drawerOpen ? '240px' : '0px', transition: 'margin-left 0.3s'}}
-            >
+            <Grid container spacing={2} columns={3}>
                 <Grid item xs={1} key={1}>
                     <SearchBar/>
                     <FastCharacterAttr characters={

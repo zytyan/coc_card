@@ -8,7 +8,7 @@ interface NavButtonProps {
 
 const NavButton: React.FC<NavButtonProps> = ({label, onClick}) => {
     return (
-        <Button variant="text" sx={{color: 'black'}} onClick={onClick} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+        <Button variant="text" sx={{color: 'black'}} onClick={onClick} style={{justifyContent: "left", width: '100%'}}>
             {label}
         </Button>
     );

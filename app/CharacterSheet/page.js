@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useReducer, useRef, useState} from 'react';
+import React, { useState } from 'react';
 import {
     Paper,
     Typography,
@@ -21,69 +21,65 @@ import {
 
 import SideBar from "@/components/SideBar";
 
-
-const DisplayAttr = ({rawAttr}) => (
+const AttributeField = ({ rawAttr, editMode, onChange }) => (
     <Grid item xs={6}>
-        <Typography>{rawAttr.name}: {rawAttr.value}</Typography>
-    </Grid>
-);
-let lastAttr = null;
-const EditAttr = ({rawAttr}) => {
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
-    const onChange = (e) => {
-        lastAttr = rawAttr;
-        rawAttr.value = e.target.value;
-        forceUpdate()
-    }
-    return (
-        <Grid item xs={6}>
+        {editMode ? (
             <TextField
                 id={rawAttr.name}
                 label={rawAttr.name}
                 value={rawAttr.value}
-                onChange={onChange}
+                onChange={(e) => onChange(rawAttr, e.target.value)}
+                fullWidth
             />
-        </Grid>
-    );
-}
+        ) : (
+            <Typography>{rawAttr.name}: {rawAttr.value}</Typography>
+        )}
+    </Grid>
+);
+
 const attributes = testDefaultCharacterAttributes();
 
-function CharacterCard({}) {
-    // Function to render a section of character attributes
+function CharacterCard() {
+    const [editMode, setEditMode] = useState(false);
+
+    const handleAttrChange = (attr, newValue) => {
+        attr.value = newValue;
+    };
+
     const renderAttributeSection = (title, attrs) => (
-        <Box sx={{padding: 2, marginBottom: 2}}>
+        <Box sx={{ padding: 2, marginBottom: 2 }}>
             <Typography variant="h6">{title}</Typography>
-            <Divider sx={{marginY: 1}}/>
+            <Divider sx={{ marginY: 1 }} />
             <Grid container spacing={2}>
                 {attrs.map((attr, index) => (
-                    <Grid item xs={6} key={index}>
-                        {editMode ? <EditAttr rawAttr={attr}/> : <DisplayAttr rawAttr={attr}/>}
-                    </Grid>
+                    <AttributeField
+                        key={index}
+                        rawAttr={attr}
+                        editMode={editMode}
+                        onChange={handleAttrChange}
+                    />
                 ))}
             </Grid>
         </Box>
     );
 
-    const [drawerOpen, setDrawerOpen] = useState(true);
-
-    // Filter attributes based on your requirements to render them in sections
+    // 根据类型过滤属性
     const playerInfo = attributes.filter(attr => attr instanceof BaseInformation);
     const baseAttributes = attributes.filter(attr => attr instanceof BaseAttribute);
     const derivedAttributes = attributes.filter(attr => attr instanceof DerivedAttribute);
     const skills = attributes.filter(attr => attr instanceof Skill);
     const belongings = attributes.filter(attr => attr instanceof BaseInformation && attr.name.includes('PersonalBelongings'));
     const background = attributes.filter(attr => attr instanceof BaseInformation && attr.name.includes('Background'));
-    const [editMode, setEditMode] = useState(false);
+
     return (
         <Box>
-            <SideBar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
-            <FormControlLabel control={<Switch onChange={
-                (e) => setEditMode(e.target.checked)
-            }/>} label="修改模式"/>
-            <Paper
-                sx={{ml: drawerOpen ? '240px' : '0px', transition: 'margin-left 0.3s'}}
-            >
-                {/* Render different sections of the character card */}
+            <Paper>
+                <FormControlLabel
+                    control={
+                        <Switch checked={editMode} onChange={(e) => setEditMode(e.target.checked)} />
+                    }
+                    label="修改模式"
+                />
                 {renderAttributeSection('Player Information', playerInfo)}
                 {renderAttributeSection('Base Attributes', baseAttributes)}
                 {renderAttributeSection('Derived Attributes', derivedAttributes)}

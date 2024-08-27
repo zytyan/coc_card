@@ -6,47 +6,100 @@ import React from "react";
 import {Attribute} from "@/datastructor/CharacterAttribute";
 import {Character} from "@/datastructor/Character";
 
-const FastCharacterAttrBox = ({avatar, attr, keyId}) => {
-    console.log(keyId,"key");
-    return (
-        <Grid item xs={1} key={keyId}>
-            <Stack
-                spacing={0}
-                alignItems="center" // 水平居中
-            >
-                <Avatar>{avatar}</Avatar>
-                <p>{attr}</p>
 
+
+const FastCharacterAttrBox = ({ avatar, attr, keyId, playerName }) => {
+    return (
+        <Grid
+            item
+            xs={1}
+            key={keyId}
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 0,
+                margin: 0,
+            }}
+        >
+            <Stack
+                spacing={1}
+                alignItems="center"
+                justifyContent="center"
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    textAlign: 'center',
+                    boxSizing: 'border-box',
+                    padding: 0,
+                    margin: 0,
+                }}
+            >
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{playerName}</div>
+                    <Stack>
+                        <Avatar>{avatar}</Avatar>
+                        <p>{attr}</p>
+                    </Stack>
             </Stack>
         </Grid>
+    );
+};
 
-    )
-}
-const FastAttrSelectBtn = ({name, setAttrKey, selectedComp, setSelectedComp}) => {
+
+const FastAttrSelectBtn = ({ name, setAttrKey, selectedComp, setSelectedComp }) => {
     return (
-        <Grid item xs={1} key={name}>
+        <Grid
+            item
+            xs={1}
+            key={name}
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 0,
+                margin: 0,
+            }}
+        >
             <Stack
                 spacing={0}
                 alignItems="center"
+                justifyContent="center"
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    textAlign: 'center',
+                    boxSizing: 'border-box',
+                    padding: 0,
+                    margin: 0,
+                    marginBottom:6
+                }}
             >
-                <ToggleButton value={name}
-                              color="primary"
-                              selected={selectedComp === name}
-                              onClick={() => {
-                                  setSelectedComp(name);
-                                  setAttrKey(name);
-                              }}
-                              style={{
-                                  minWidth: '60px',
-                                  height: '40px',
-                              }}
+                <ToggleButton
+                    value={name}
+                    color="primary"
+                    selected={selectedComp === name}
+                    onClick={() => {
+                        setSelectedComp(name);
+                        setAttrKey(name);
+                    }}
+                    style={{
+                        minWidth: '75px',
+                        height: '40px',
+                        padding: 0,
+                        margin: 0,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxSizing: 'border-box',
+                    }}
                 >
                     {name}
                 </ToggleButton>
             </Stack>
         </Grid>
-    )
+    );
 }
+
 export const FastCharacterAttr = ({characters}) => {
     "use client";
     const [attrKey, setAttrKey] = useState('STR');
@@ -59,8 +112,9 @@ export const FastCharacterAttr = ({characters}) => {
             <Typography>快速属性： {attrKey}</Typography>
             <Grid container spacing={2} columns={3}>
                 {characters.map((character, index) => {
-                    console.log("ststajlksdfj");
-                    return (<FastCharacterAttrBox avatar={index} attr={character?.attributes[attrKey]?.value ?? "nan"} keyId={index}/>);
+                    // console.log(character);
+                    return (<FastCharacterAttrBox
+                        avatar={index} attr={character?.attributes[attrKey]?.value ?? "nan"} playerName={character?.name} keyId={index}/>);
                 })}
             </Grid>
 
@@ -79,10 +133,6 @@ export const FastCharacterAttr = ({characters}) => {
                 <FastAttrSelectBtn name={"INT/IDE"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
                 <FastAttrSelectBtn name={"POW"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
-                                   setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"EDU"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
-                                   setSelectedComp={setSelectedComp}/>
-                <FastAttrSelectBtn name={"MOV"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>
                 <FastAttrSelectBtn name={"HP"} setAttrKey={setAttrKey} selectedComp={setSelectedComp}
                                    setSelectedComp={setSelectedComp}/>

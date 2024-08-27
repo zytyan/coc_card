@@ -3,7 +3,8 @@ import CustomDrawer from './CustomDrawer';
 import {useRouter} from 'next/navigation';
 import SpaceDashboardRounded from '@mui/icons-material/SpaceDashboardRounded';
 import IconButton from "@mui/material/IconButton";
-
+import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
 
 interface DrawerContainerProps {
     drawerOpen: boolean;
@@ -28,18 +29,20 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({drawerOpen, setDrawerO
     const buttons = [
         {label: 'Home', onClick: () => handleButtonClick('/')},
         {label: 'Character Sheet', onClick: () => handleButtonClick('/CharacterSheet')},
+        {label: 'Battle Indicator', onClick: () => handleButtonClick('/BattleIndicator')},
+        {label: 'Module Sheet', onClick: () => handleButtonClick('/ModuleSheet')},
     ];
 
 
     return (
-        <div>
-            <div style={{display: 'flex', justifyContent: 'flex-start', padding: '8px'}}>
-                <IconButton onClick={handleDrawerOpen}>
+        <Stack direction="row" spacing={2}>
+            <Box style={{display: 'flex', justifyContent: 'flex-start', padding: '8px',}}>
+                <IconButton onClick={handleDrawerOpen} >
                     <SpaceDashboardRounded/>
                 </IconButton>
-            </div>
+            </Box>
             <CustomDrawer open={drawerOpen} onClose={handleDrawerClose} buttons={buttons}/>
-        </div>
+        </Stack>
     );
 };
 
