@@ -23,14 +23,7 @@ function DraggableFastCharacterAttr() {
     return (
         <Draggable handle=".draggable-handle">
             <Paper style={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px'}}>
-                <div className="draggable-handle"
-                     style={{
-                         cursor: 'move',
-                         height: '100%',
-                         display: 'grid',
-                         placeItems: 'center'
-                     }}
-                >
+                <div className="draggable-handle" style={{cursor: 'move', display: 'grid',}}>
                     <FastCharacterAttr
                         characters={[
                             new Character("狐狸", testDefaultCharacterAttributes()),
